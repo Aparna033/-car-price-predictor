@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head xmlns="http://www.w3.org/1999/xhtml">
+    <title>Car Price Predictor</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="static/css/style.css">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+          crossorigin="anonymous">
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@2.0.0/dist/tf.min.js"></script>
+
+
+</head>
+
+<body class="bg-dark">
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="card mt-50" style="width:100%; height:100%;">
+
+            <div class="card-header" style="width: 100%; height: 100%">
+
+                <div class="card-header" style="text-align: center">
+                    <h1>Welcome To Car Price Predictor</h1>
+                </div>
+
+            </div>
+
+            <div class="card-body">
+                <div class="col-12" style="text-align: center">
+                    <h5>This app predicts the price of a car you want to sell. Try filling the details below:</h5>
+                </div>
+                <br>
+
+                <form method="post" action="/predict" accept-charset="utf-8" name="Modelform">
+
+                     <!-- Car ID -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Car ID:</b></label>
+                        <input type="number" class="form-control" name="car_ID" required>
+                    </div>
+
+                    <!-- Symboling -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Symboling:</b></label>
+                        <input type="number" class="form-control" name="symboling" required>
+                    </div>
+
+                    <!-- Car Name -->
+                    <div class="col-12 form-group"style="text-align: center">
+                        <label><b>Select Car Name:</b></label><br>
+
+                        <select class="selectpicker form-control" id="CarName" name="CarName" required="1" placeholder="select">
+
+                            {% for car in CarName %}
+
+                            <option value="{{ car }}">{{ car }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Fuel Type -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Fuel Type:</b></label><br>
+
+                        <select class="selectpicker form-control" id="fueltype" name="fueltype" required="1" placeholder="select">
+
+                            {% for fuel in fueltype %}
+
+                            <option value="{{ fuel }}">{{ fuel }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Aspiration -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Aspiration:</b></label><br>
+
+                        <select class="selectpicker form-control" id="aspiration" name="aspiration" required="1"placeholder="select">
+
+                            {% for item in aspiration %}
+
+                            <option value="{{ item }}">{{ item }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Door Number -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Door Number:</b></label><br>
+
+                        <select class="selectpicker form-control" id="doornumber" name="doornumber" required="1" placeholder="select">
+
+                            {% for item in doornumber %}
+
+                            <option value="{{ item }}">{{ item }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Car Body -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Car Body:</b></label><br>
+
+                        <select class="selectpicker form-control" id="carbody" name="carbody" required="1" placeholder="select">
+
+                            {% for item in carbody %}
+
+                            <option value="{{ item }}">{{ item }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Drive Wheel -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Drive Wheel:</b></label><br>
+
+                        <select class="selectpicker form-control" id="drivewheel" name="drivewheel" required="1" placeholder="select">
+
+                            {% for item in drivewheel %}
+
+                            <option value="{{ item }}">{{ item }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Engine Location -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Engine Location:</b></label><br>
+
+                        <select class="selectpicker form-control" id="enginelocation" name="enginelocation" required="1" placeholder="select">
+
+                            {% for item in enginelocation %}
+
+                            <option value="{{ item }}">{{ item }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Engine Type -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Engine Type:</b></label><br>
+
+                        <select class="selectpicker form-control" id="enginetype" name="enginetype" required="1" placeholder="select">
+
+                            {% for item in enginetype %}
+
+                            <option value="{{ item }}">{{ item }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Cylinder Number -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Cylinder Number:</b></label><br>
+
+                        <select class="selectpicker form-control" id="cylindernumber" name="cylindernumber" required="1" placeholder="select">
+
+                            {% for item in cylindernumber %}
+
+                            <option value="{{ item }}">{{ item }}</option>
+
+                            {% endfor %}
+
+                        </select>
+                    </div>
+
+                    <!-- Fuel System -->
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Select Fuel System:</b></label><br>
+
+                        <select class="selectpicker form-control" id="fuelsystem" name="fuelsystem" required="1" placeholder="select">
+
+                              {% for item in fuelsystem %}
+                               <option value="{{ item }}">{{ item }}</option>
+                              {% endfor %}
+                        </select>
+                    </div>
+
+                     <!-- Numeric Inputs -->
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Wheel Base:</b></label>
+                        <input type="number" step="any" class="form-control" name="wheelbase" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Car Length:</b></label>
+                        <input type="number" step="any" class="form-control" name="carlength" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Car Width:</b></label>
+                        <input type="number" step="any" class="form-control" name="carwidth" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Car Height:</b></label>
+                        <input type="number" step="any" class="form-control" name="carheight" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Curb Weight:</b></label>
+                        <input type="number" step="any" class="form-control" name="curbweight" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Engine Size:</b></label>
+                        <input type="number" step="any" class="form-control" name="enginesize" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Bore Ratio:</b></label>
+                        <input type="number" step="any" class="form-control" name="boreratio" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Stroke:</b></label>
+                        <input type="number" step="any" class="form-control" name="stroke" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Compression Ratio:</b></label>
+                        <input type="number" step="any" class="form-control" name="compressionratio" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Horsepower:</b></label>
+                        <input type="number" step="any" class="form-control" name="horsepower" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Peak RPM:</b></label>
+                        <input type="number" step="any" class="form-control" name="peakrpm" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>City MPG:</b></label>
+                        <input type="number" step="any" class="form-control" name="citympg" required>
+                    </div>
+
+                    <div class="col-12 form-group" style="text-align: center">
+                        <label><b>Highway MPG:</b></label>
+                        <input type="number" step="any" class="form-control" name="highwaympg" required>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="col-12 form-group" style="text-align: center">
+
+                        <button type="button"
+                                class="btn btn-primary form-control"
+                                onclick="send_data()">
+
+                            Predict Price
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <br>
+
+                <div class="row">
+
+                    <div class="col-12 text-center">
+
+                        <h3>
+                            <span id="prediction"></span>
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    function form_handler(event)
+    {
+        event.preventDefault();
+    }
+
+    function send_data()
+    {
+        document.querySelector('form').addEventListener('submit', form_handler);
+
+        var fd = new FormData(document.querySelector('form'));
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST', '/predict', true);
+
+        document.getElementById("prediction").innerHTML =
+            "Wait! Predicting Price...";
+
+        xhr.onreadystatechange = function ()
+        {
+            if (xhr.readyState == XMLHttpRequest.DONE)
+            {
+                document.getElementById("prediction").innerHTML =
+                    "Prediction: Rs " + xhr.responseText;
+            }
+        };
+
+        xhr.onload = function() {};
+
+        xhr.send(fd);
+    }
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
