@@ -1,13 +1,215 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 *{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    min-height: 100vh;
+    background:
+    linear-gradient(
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.55)
+    ),
+    url("https://images.unsplash.com/photo-1503376780353-7e6692767b70");
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    min-height:100vh;
+    padding:40px;
 }
 
-.bg-dark{
-    background-color: #757678;
+.main-container{
+    width:100%;
+    padding: 30px;
+    min-height:100vh;
 }
 
-.mt-50{
-    margin-top: 50px;
+/* Main Card */
+
+.glass-card{
+    background:rgba(255,255,255,0.08)!important;
+    backdrop-filter:blur(18px);
+    border:none!important;
+    border-radius:25px!important;
+    overflow:hidden;
+    box-shadow:0 10px 40px rgba(0,0,0,0.5);
+    width:100%;
+}
+
+/* Header */
+
+.header-section{
+    background:transparent!important;
+    border:none!important;
+    text-align:center;
+}
+
+.header-section h1{
+    color:white;
+    font-weight:700;
+    font-size:50px;
+    padding: 30px;
+
+}
+.header-section p{
+    font-size: 20px;
+    color: silver;
+}
+
+.card-body h5{
+    color:#d6d6d6;
+}
+
+/* Two Column Layout */
+
+.form-grid{
+    display:flex;
+    justify-content:center;
+    margin-top:30px;
+    width:100%;;
+}
+
+/* Sections */
+
+.section-card{
+    width:1200px;
+    max-width:95%;
+
+    background:rgba(20,20,20,0.8);
+    backdrop-filter:blur(20px);
+    border-radius:20px;
+    padding:25px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.4);
+
+    transition:.5s;
+    min-height:75vh;  /* fills most of screen */
+    overflow-y:auto;
+}
+
+.section-card:hover{
+    transform:translateY(-5px);
+}
+
+.section-card h3{
+    color:#00d4ff;
+    text-align:center;
+    margin-bottom:50px;
+    font-weight:600;
+    font-size: 30px;
+    padding: 20px;
+}
+
+/* Form Inputs */
+
+.form-group{
+    margin-bottom:15px!important;
+}
+
+.form-group label{
+    color:white;
+    font-size:18px;
+    font-weight:400;
+    margin-bottom:10px;
+}
+
+.form-control{
+    background:rgba(255,255,255,0.1)!important;
+    border:none!important;
+    color:white!important;
+    border-radius:50px!important;
+    padding:10px 20px!important;
+    height:55px;
+    font-size:16px;
+}
+
+.form-control:focus{
+    box-shadow:0 0 15px #00d4ff!important;
+    border:none!important;
+}
+
+select option{
+    color:black;
+}
+
+/* Predict Button */
+
+.predict-btn{
+    width:100%;
+    margin-top:30px;
+    padding:30px;
+    border:none;
+    border-radius:15px;
+
+    background:linear-gradient(
+        135deg,
+        #00d4ff,
+        #007bff
+    );
+
+    color:white;
+    font-size:20px;
+    font-weight:800;
+
+    transition:0.4s;
+}
+
+.predict-btn:hover{
+    transform:translateY(-4px);
+    box-shadow:0px 10px 30px rgba(0,123,255,.5);
+}
+
+/* Prediction Card */
+
+.prediction-card{
+    margin-top:30px;
+    text-align:center;
+
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(15px);
+
+    border-radius:20px;
+    padding:25px;
+
+    animation:fadeUp .8s ease;
+}
+
+.prediction-card h2{
+    color:#00ff84;
+    font-weight:500;
+    font-size: 20px;
+}
+
+/* Animation */
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* Mobile */
+
+@media(max-width:992px){
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .header-section h1{
+        font-size:28px;
+    }
+
 }
